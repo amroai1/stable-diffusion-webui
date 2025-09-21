@@ -1,0 +1,22 @@
+[phases.setup]
+cmds = [
+    "apt-get update",
+    "apt-get install -y wget git python3 python3-venv libgl1 libglib2.0-0",
+    "python -m venv /venv"
+]
+
+[phases.install]
+cmds = [
+    "source /venv/bin/activate",
+    "pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu",
+    "pip install -r requirements.txt"
+]
+
+[phases.build]
+cmds = [
+    "source /venv/bin/activate",
+    "python -c \"import torch; print(f'PyTorch version: {torch.__version__}')\""
+]
+
+[start]
+cmd = "source /venv/bin/activate && python launch.py --listen --port $PORT --skip-torch-cuda-test --no-half"
