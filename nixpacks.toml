@@ -14,7 +14,8 @@ cmds = [
 
 [phases.build]
 cmds = [
-    "/venv/bin/python3 -c \"import torch; print(f'PyTorch version: {torch.__version__}')\""
+    "/venv/bin/python3 -c \"import torch; print(f'PyTorch version: {torch.__version__}')\"",
+    "/venv/bin/python3 -c \"import gradio; print(f'Gradio version: {gradio.__version__}')\""
 ]
 
 [start]
