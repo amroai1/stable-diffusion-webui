@@ -1,22 +1,21 @@
 [phases.setup]
 cmds = [
     "apt-get update",
-    "apt-get install -y wget git python3 python3-venv libgl1 libglib2.0-0",
+    "apt-get install -y wget git python3 python3-venv python3-pip libgl1 libglib2.0-0",
     "python3 -m venv /venv"
 ]
 
 [phases.install]
 cmds = [
-    "source /venv/bin/activate",
-    "pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu",
-    "pip install -r requirements.txt"
+    "/venv/bin/pip install --upgrade pip",
+    "/venv/bin/pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu",
+    "/venv/bin/pip install -r requirements.txt"
 ]
 
 [phases.build]
 cmds = [
-    "source /venv/bin/activate",
-    "python3 -c \"import torch; print(f'PyTorch version: {torch.__version__}')\""
+    "/venv/bin/python3 -c \"import torch; print(f'PyTorch version: {torch.__version__}')\""
 ]
 
 [start]
-cmd = "source /venv/bin/activate && python3 launch.py --listen --port $PORT --skip-torch-cuda-test --no-half"
+cmd = "/venv/bin/python3 launch.py --listen --port $PORT --skip-torch-cuda-test --no-half --enable-insecure-extension-access"
